@@ -6,8 +6,9 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 function OrderDetailsCard({
-  order, onUpdate, onDelete, onAddItem, onCloseOrder,
+  order, onUpdate, onDeleteOrder, onDeleteItem, onAddItem, onCloseOrder,
 }) {
+  console.warn({ onDeleteOrder, onDeleteItem });
   return (
     <Card id="detailcard" className="mb-3">
       <Card.Header style={{ borderRadius: '15px 15px 0 0' }}>
@@ -17,7 +18,7 @@ function OrderDetailsCard({
             <Button id="edit1" onClick={() => onUpdate(order.orderId)}>
               <img src="/edit.png" alt="Edit post" style={{ width: '24px', height: '24px' }} />
             </Button>
-            <Button id="delete1" onClick={() => onDelete(order.orderId)}>
+            <Button id="delete1" onClick={() => onDeleteOrder(order.orderId)}>
               <img src="/delete.png" alt="Delete post" style={{ width: '24px', height: '24px' }} />
             </Button>
           </>
@@ -39,8 +40,9 @@ function OrderDetailsCard({
                 <h6>Items:</h6>
                 {item.itemName} - ${item.price.toFixed(2)}
               </div>
+
               {order.isOpen && (
-                <Button variant="outline-dark" size="sm" onClick={() => onDelete(item.orderItemId)}>Delete</Button>
+                <Button variant="outline-dark" size="sm" onClick={() => onDeleteItem(item.orderItemId)}>Delete</Button>
               )}
             </div>
           </ListGroup.Item>
@@ -76,7 +78,8 @@ OrderDetailsCard.propTypes = {
     })).isRequired,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  onDeleteOrder: PropTypes.func.isRequired,
+  onDeleteItem: PropTypes.func.isRequired,
   onAddItem: PropTypes.func.isRequired,
   onCloseOrder: PropTypes.func.isRequired,
 };

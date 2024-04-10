@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import OrderDetailsCard from '../../components/OrderDetailsCard';
-import { getOrderById } from '../../components/api/orderData';
+import { getOrderById, deleteOrder, deleteOrderItem } from '../../components/api/orderData';
 
 function OrderDetails() {
   const [order, setOrder] = useState(null);
@@ -18,6 +18,32 @@ function OrderDetails() {
     }
   }, [router.isReady, id]);
 
+  const handleDeleteOrder = () => {
+    const isConfirmed = window.confirm('Are you sure you want to delete this order?');
+    if (isConfirmed) {
+      deleteOrder(id).then(() => {
+        alert('Order deleted successfully.');
+        router.push('/orders'); // Adjust the path as necessary
+      }).catch((err) => {
+        console.error('Failed to delete order:', error);
+        setError(err);
+      });
+    }
+  };
+
+  const handleDeleteItem = (itemId) => {
+    const isConfirmed = window.confirm('Are you sure you want to delete this item?');
+    if (isConfirmed) {
+      deleteOrderItem(itemId).then(() => {
+        alert('Item deleted successfully.');
+        getOrderById(id).then(setOrder).catch(setError);
+      }).catch((err) => {
+        console.error('Failed to delete item:', error);
+        setError(err);
+      });
+    }
+  };
+
   if (error) {
     return <div>Error fetching order: {error.message}</div>;
   }
@@ -31,7 +57,11 @@ function OrderDetails() {
       <h1>{`${order.customerName}'s Order`}</h1><br />
       <div id="order-details">
         {/* render over order.items and render an OrderDetailsCard for each */}
-        <OrderDetailsCard order={order} />
+        <OrderDetailsCard
+          order={order}
+          onDeleteOrder={handleDeleteOrder}
+          onDeleteItem={handleDeleteItem}
+        />
       </div>
     </div>
   );
