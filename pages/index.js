@@ -16,7 +16,7 @@ function Home() {
       <h1>Hello {user.fbUser.displayName}! </h1>
       <p>Choose one of the options below to get started.</p><br />
       <Link href="/orders">
-        View Order
+        View All Orders
       </Link>
       <Link href="/orders/new">
         Create An Order
