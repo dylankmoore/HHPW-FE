@@ -18,7 +18,7 @@ function Orders() {
             <OrderCard key={order.orderId} orderObj={order} />
           ))
         ) : (
-          <p>No orders to currently</p>
+          <p>No orders to currently.</p>
         )}
       </div>
     </div>
