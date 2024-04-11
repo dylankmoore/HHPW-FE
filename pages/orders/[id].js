@@ -23,7 +23,7 @@ function OrderDetails() {
     if (isConfirmed) {
       deleteOrder(id).then(() => {
         alert('Order deleted successfully.');
-        router.push('/orders'); // Adjust the path as necessary
+        router.push('/orders');
       }).catch((err) => {
         console.error('Failed to delete order:', error);
         setError(err);

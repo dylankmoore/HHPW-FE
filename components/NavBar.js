@@ -29,10 +29,10 @@ export default function NavBar() {
             <Link passHref href="/orders">
               <Nav.Link>View Orders</Nav.Link>
             </Link>&nbsp;
-            <Link passHref href="/delete-me">
+            <Link passHref href="/orders/new">
               <Nav.Link>Create An Order</Nav.Link>
             </Link>&nbsp;
-            <Link passHref href="/delete-me">
+            <Link passHref href="/orders/revenue">
               <Nav.Link>View Revenue</Nav.Link>
             </Link>
             <button

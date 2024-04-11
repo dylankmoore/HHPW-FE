@@ -90,6 +90,33 @@ const deleteOrderItem = (orderId, itemId) => {
   });
 };
 
+// CREATE an order
+const createNewOrder = (orderDetails) => {
+  const url = `${endpoint}/orders/new`;
+
+  return new Promise((resolve, reject) => {
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(orderDetails),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to create new order');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export {
-  getOrders, getOrderById, deleteOrder, deleteOrderItem,
+  getOrders, getOrderById, deleteOrder, deleteOrderItem, createNewOrder,
 };
