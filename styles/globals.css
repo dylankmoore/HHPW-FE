@@ -58,15 +58,14 @@ body {
 }
 
 #orders{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+display: flex;
+flex-wrap: wrap;
 }
 
 #ordercard{
-  display: flex;
-  justify-content: center;
-  padding-left: 5px;
+  width: 400px;
+  padding-bottom: 10px;
+  padding-left: 90px;
 }
 
 #details {
@@ -155,4 +154,37 @@ body {
   border-color: white;
   box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
   transform: translateY(-0.25em);
+}
+
+#createsubmit{
+  width: 70px;
+  margin-left: 90px;
+  width: 150px;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: rgb(173, 99, 99);
+  border: 2px solid white; 
+  color: white;
+  padding: 10px 0;
+  border-radius: 0;
+  box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#createsubmit:hover,
+#createsubmit:focus {
+  background-color: rgb(255, 107, 88);
+  border-color: white;
+  box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(-0.25em);
+}
+
+#createformpage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#createformpage input,
+#createformpage select {
+  width: 400px;
+  max-width: 100%;
 }

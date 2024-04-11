@@ -11,17 +11,20 @@ function OrderDetailsCard({
   console.warn({ onDeleteOrder, onDeleteItem });
   return (
     <Card id="detailcard" className="mb-3">
-      <Card.Header style={{ borderRadius: '15px 15px 0 0' }}>
-        {`${order.customerName}'s Order`}&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+      <Card.Header style={{
+        borderRadius: '15px 15px 0 0', display: 'flex', justifyContent: 'space-between', padding: '10px',
+      }}
+      >
+        {`${order.customerName}'s Order`}
         {order.isOpen && (
-          <>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
             <Button id="edit1" onClick={() => onUpdate(order.orderId)}>
-              <img src="/edit.png" alt="Edit post" style={{ width: '24px', height: '24px' }} />
+              <img src="/edit.png" alt="Edit post" style={{ width: '20px', height: '20px' }} />
             </Button>
             <Button id="delete1" onClick={() => onDeleteOrder(order.orderId)}>
-              <img src="/delete.png" alt="Delete post" style={{ width: '24px', height: '24px' }} />
+              <img src="/delete.png" alt="Delete post" style={{ width: '20px', height: '20px' }} />
             </Button>
-          </>
+          </div>
         )}
       </Card.Header>
       <ListGroup variant="flush">
