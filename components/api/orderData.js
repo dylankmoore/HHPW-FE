@@ -117,6 +117,29 @@ const createNewOrder = (orderDetails) => {
   });
 };
 
+// UPDATE an order
+const updateOrder = (orderId, updatedDetails) => {
+  const url = `${endpoint}/orders/${orderId}`;
+
+  return new Promise((resolve, reject) => {
+    fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedDetails),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to update the order');
+        }
+        return response.json();
+      })
+      .then((data) => resolve(data))
+      .catch((error) => reject(error));
+  });
+};
+
 export {
-  getOrders, getOrderById, deleteOrder, deleteOrderItem, createNewOrder,
+  getOrders, getOrderById, deleteOrder, deleteOrderItem, createNewOrder, updateOrder,
 };

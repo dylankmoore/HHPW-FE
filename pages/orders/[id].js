@@ -44,6 +44,10 @@ function OrderDetails() {
     }
   };
 
+  const handleUpdateOrder = () => {
+    router.push(`/orders/edit/${id}`);
+  };
+
   if (error) {
     return <div>Error fetching order: {error.message}</div>;
   }
@@ -61,6 +65,7 @@ function OrderDetails() {
           order={order}
           onDeleteOrder={handleDeleteOrder}
           onDeleteItem={handleDeleteItem}
+          onUpdate={handleUpdateOrder}
         />
       </div>
     </div>

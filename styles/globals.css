@@ -188,3 +188,36 @@ flex-wrap: wrap;
   width: 400px;
   max-width: 100%;
 }
+
+#updateorderform {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#updateorderform input,
+#updateorderform select {
+  width: 400px;
+  max-width: 100%;
+}
+
+#update-btn{
+  width: 70px;
+  margin-left: 90px;
+  width: 150px;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: rgb(173, 99, 99);
+  border: 2px solid white; 
+  color: white;
+  padding: 10px 0;
+  border-radius: 0;
+  box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#update-btn:hover,
+#update-btn:focus {
+  background-color: rgb(255, 107, 88);
+  border-color: white;
+  box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(-0.25em);
+}

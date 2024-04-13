@@ -1,46 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Form, Button, Alert } from 'react-bootstrap';
-import { createNewOrder } from '../api/orderData';
+import { getOrderById, updateOrder } from '../api/orderData';
 
-const CreateOrderForm = () => {
+const UpdateOrderForm = () => {
   const [orderDetails, setOrderDetails] = useState({
     customerName: '',
-    email: '',
     customerPhone: '',
+    email: '',
     isPhone: false,
   });
   const [submissionStatus, setSubmissionStatus] = useState(null);
   const router = useRouter();
+  const { id } = router.query;
+
+  useEffect(() => {
+    if (id) {
+      getOrderById(id)
+        .then((data) => {
+          setOrderDetails({
+            customerName: data.customerName,
+            customerPhone: data.customerPhone,
+            email: data.email,
+            isPhone: data.isPhone,
+          });
+        })
+        .catch((error) => {
+          console.error('Failed to fetch order details:', error);
+          setSubmissionStatus({ success: false, message: 'Failed to fetch order details' });
+        });
+    }
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setOrderDetails({ ...orderDetails, [name]: value });
+    setOrderDetails((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    createNewOrder(orderDetails)
-      .then((newOrder) => {
-        setSubmissionStatus({ success: true, message: 'Order created successfully!' });
-        router.push(`/orders/${newOrder.orderId}`);
+    updateOrder(id, orderDetails)
+      .then(() => {
+        setSubmissionStatus({ success: true, message: 'Order updated successfully!' });
+        router.push(`/orders/${id}`);
       })
       .catch((error) => {
-        setSubmissionStatus({ success: false, message: error.message });
+        console.error('Failed to update the order:', error);
+        setSubmissionStatus({ success: false, message: 'Failed to update the order' });
       });
   };
 
   return (
-    <>
-      <h1>Create Order</h1><br />
-      <div id="createformpage"><br />
+    <><br />
+      <h1>Update Order</h1><br />
+      <div id="updateorderform">
         {submissionStatus && (
           <Alert variant={submissionStatus.success ? 'success' : 'danger'}>
             {submissionStatus.message}
           </Alert>
         )}
         <Form onSubmit={handleSubmit}>
-          {/* Name Input */}
           <Form.Group>
             <Form.Label>Customer Name:</Form.Label>
             <Form.Control
@@ -52,11 +71,10 @@ const CreateOrderForm = () => {
             />
           </Form.Group><br />
 
-          {/* Email Input */}
           <Form.Group>
             <Form.Label>Email:</Form.Label>
             <Form.Control
-              type="text"
+              type="email"
               name="email"
               value={orderDetails.email}
               onChange={handleChange}
@@ -64,7 +82,6 @@ const CreateOrderForm = () => {
             />
           </Form.Group><br />
 
-          {/* Phone Number Input */}
           <Form.Group>
             <Form.Label>Phone Number:</Form.Label>
             <Form.Control
@@ -76,11 +93,11 @@ const CreateOrderForm = () => {
             />
           </Form.Group><br />
 
-          {/* Order Type Select */}
           <Form.Group>
             <Form.Label>Order Type:</Form.Label>
             <Form.Select
               name="isPhone"
+              value={orderDetails.isPhone ? 'phone' : 'inPerson'}
               onChange={(e) => handleChange({ target: { name: 'isPhone', value: e.target.value === 'phone' } })}
               required
             >
@@ -88,17 +105,13 @@ const CreateOrderForm = () => {
               <option value="phone">Phone</option>
               <option value="inPerson">In-Person</option>
             </Form.Select>
-          </Form.Group><br />
+          </Form.Group><br /><br />
 
-          {/* Items will go here */}
-
-          {/* Submit Button */}
-          <br />
-          <Button type="submit" className="copy-btn raise" id="createsubmit">Create Order</Button>
+          <Button type="submit" className="copy-btn raise" id="update-btn">Update Order</Button>
         </Form>
       </div>
     </>
   );
 };
 
-export default CreateOrderForm;
+export default UpdateOrderForm;
