@@ -1,14 +1,47 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Button, Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import {
+  getItems, addItemToOrder, getOrderById,
+} from './api/orderData';
 
 function OrderDetailsCard({
-  order, onUpdate, onDeleteOrder, onDeleteItem, onAddItem, onCloseOrder,
+  order, onUpdate, onDeleteOrder, onDeleteItem, onCloseOrder, setOrder,
 }) {
-  console.warn({ onDeleteOrder, onDeleteItem });
+  const [items, setItems] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    getItems()
+      .then((fetchedItems) => {
+        setItems(fetchedItems);
+      })
+      .catch(console.error);
+  }, []);
+
+  const updateOrderDetails = (orderId) => {
+    getOrderById(orderId)
+      .then((updatedOrder) => {
+        setOrder(updatedOrder);
+      })
+      .catch(console.error);
+  };
+
+  const handleAddItem = (itemId) => {
+    console.warn('handleAddItem called with itemId:', itemId);
+
+    addItemToOrder(order.orderId, itemId)
+      .then((response) => {
+        console.warn('Item added:', response);
+        setShowModal(false);
+        updateOrderDetails(order.orderId);
+      })
+      .catch(console.error);
+  };
+
   return (
     <Card id="detailcard" className="mb-3">
       <Card.Header style={{
@@ -38,6 +71,7 @@ function OrderDetailsCard({
         <ListGroup.Item><strong>Open Time:</strong> {new Date(order.orderTime).toLocaleString()}</ListGroup.Item>
         {order.items.map((item) => (
           <ListGroup.Item key={item.orderItemId}>
+
             <div className="d-flex justify-content-between align-items-center">
               <div>
                 <h6>Items:</h6>
@@ -45,19 +79,41 @@ function OrderDetailsCard({
               </div>
 
               {order.isOpen && (
-                <Button variant="outline-dark" size="sm" onClick={() => onDeleteItem(item.orderItemId)}>Delete</Button>
+                <Button variant="outline-dark" size="sm" onClick={() => onDeleteItem(order.orderId, item.orderItemId)}>Delete</Button>
               )}
             </div>
           </ListGroup.Item>
         ))}
         <ListGroup.Item className="d-flex justify-content-between">
           {order.isOpen && (
-          <Button id="additemsbtn" onClick={onAddItem}>Add Items</Button>)}
+          <Button id="additemsbtn" onClick={() => setShowModal(true)}>Add Items</Button>)}
           {order.isOpen && (
             <Button id="delitemsbtn" onClick={() => onCloseOrder(order.orderId)}>Close Order</Button>
           )}
         </ListGroup.Item>
       </ListGroup>
+      {/* Modal for adding items */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Add Items to Order</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ListGroup>
+            {items.map((item) => (
+              <ListGroup.Item key={item.itemId}>
+                {item.name} - ${item.price.toFixed(2)}
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={() => handleAddItem(item.itemId)}
+                >
+                  Add
+                </Button>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </Modal.Body>
+      </Modal>
     </Card>
   );
 }
@@ -83,8 +139,8 @@ OrderDetailsCard.propTypes = {
   onUpdate: PropTypes.func.isRequired,
   onDeleteOrder: PropTypes.func.isRequired,
   onDeleteItem: PropTypes.func.isRequired,
-  onAddItem: PropTypes.func.isRequired,
   onCloseOrder: PropTypes.func.isRequired,
+  setOrder: PropTypes.func.isRequired,
 };
 
 export default OrderDetailsCard;

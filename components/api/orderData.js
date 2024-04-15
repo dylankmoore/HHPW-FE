@@ -69,8 +69,9 @@ const deleteOrder = (orderId) => {
 };
 
 // DELETE an item from an order
-const deleteOrderItem = (orderId, itemId) => {
-  const url = `${endpoint}/orders/${orderId}/items/${itemId}`;
+const deleteOrderItem = (orderId, orderItemId) => {
+  console.warn('Deleting item with orderId:', orderId, 'orderItemId:', orderItemId);
+  const url = `${endpoint}/orders/${orderId}/items/${orderItemId}`;
 
   return new Promise((resolve, reject) => {
     fetch(url, {
@@ -81,7 +82,7 @@ const deleteOrderItem = (orderId, itemId) => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Failed to delete the item ${itemId} from order ${orderId}`);
+          throw new Error(`Failed to delete the order item ${orderItemId} from order ${orderId}`);
         }
         return response.text();
       })
@@ -140,6 +141,52 @@ const updateOrder = (orderId, updatedDetails) => {
   });
 };
 
+// ADD items to orders
+const addItemToOrder = (orderId, itemId) => {
+  const url = `${endpoint}/orders/${orderId}/items/${itemId}`;
+  const payload = { itemId };
+
+  return new Promise((resolve, reject) => {
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to add item to order');
+        }
+        return response.json();
+      })
+      .then((data) => resolve(data))
+      .catch((error) => reject(error));
+  });
+};
+
+// GET all items
+const getItems = () => {
+  const url = `${endpoint}/items`;
+
+  return new Promise((resolve, reject) => {
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch items');
+        }
+        return response.json();
+      })
+      .then((data) => resolve(data))
+      .catch((error) => reject(error));
+  });
+};
+
 export {
-  getOrders, getOrderById, deleteOrder, deleteOrderItem, createNewOrder, updateOrder,
+  getOrders, getOrderById, deleteOrder, deleteOrderItem, createNewOrder, updateOrder, addItemToOrder, getItems,
 };
