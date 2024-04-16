@@ -9,7 +9,7 @@ import {
 } from './api/orderData';
 
 function OrderDetailsCard({
-  order, onUpdate, onDeleteOrder, onDeleteItem, onCloseOrder, setOrder,
+  order, onUpdate, onDeleteOrder, onDeleteItem, setOrder, onCloseOrder,
 }) {
   const [items, setItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -49,16 +49,16 @@ function OrderDetailsCard({
       }}
       >
         {`${order.customerName}'s Order`}
-        {order.isOpen && (
-          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-            <Button id="edit1" onClick={() => onUpdate(order.orderId)}>
-              <img src="/edit.png" alt="Edit post" style={{ width: '20px', height: '20px' }} />
-            </Button>
-            <Button id="delete1" onClick={() => onDeleteOrder(order.orderId)}>
-              <img src="/delete.png" alt="Delete post" style={{ width: '20px', height: '20px' }} />
-            </Button>
-          </div>
-        )}
+        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+          {order.isOpen && (
+          <Button id="edit1" onClick={() => onUpdate(order.orderId)}>
+            <img src="/edit.png" alt="Edit post" style={{ width: '20px', height: '20px' }} />
+          </Button>
+          )}
+          <Button id="delete1" onClick={() => onDeleteOrder(order.orderId)}>
+            <img src="/delete.png" alt="Delete post" style={{ width: '20px', height: '20px' }} />
+          </Button>
+        </div>
       </Card.Header>
       <ListGroup variant="flush">
         <ListGroup.Item><strong>Email:</strong> {order.email}</ListGroup.Item>
@@ -71,7 +71,6 @@ function OrderDetailsCard({
         <ListGroup.Item><strong>Open Time:</strong> {new Date(order.orderTime).toLocaleString()}</ListGroup.Item>
         {order.items.map((item) => (
           <ListGroup.Item key={item.orderItemId}>
-
             <div className="d-flex justify-content-between align-items-center">
               <div>
                 <h6>Items:</h6>
@@ -79,7 +78,7 @@ function OrderDetailsCard({
               </div>
 
               {order.isOpen && (
-                <Button variant="outline-dark" size="sm" onClick={() => onDeleteItem(order.orderId, item.orderItemId)}>Delete</Button>
+                <Button variant="outline-dark" size="sm" onClick={() => onDeleteItem(item.orderItemId)}>Delete</Button>
               )}
             </div>
           </ListGroup.Item>
@@ -88,7 +87,7 @@ function OrderDetailsCard({
           {order.isOpen && (
           <Button id="additemsbtn" onClick={() => setShowModal(true)}>Add Items</Button>)}
           {order.isOpen && (
-            <Button id="delitemsbtn" onClick={() => onCloseOrder(order.orderId)}>Close Order</Button>
+            <Button id="delitemsbtn" onClick={onCloseOrder}>Close Order</Button>
           )}
         </ListGroup.Item>
       </ListGroup>

@@ -187,6 +187,35 @@ const getItems = () => {
   });
 };
 
+// CLOSE orders
+const closeOrder = (orderId, paymentDetails) => {
+  const url = `${endpoint}/orders/${orderId}/close`;
+
+  return new Promise((resolve, reject) => {
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(paymentDetails),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to close order');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.warn('Order closed:', data);
+        resolve(data);
+      })
+      .catch((error) => {
+        console.error('Failed to close order:', error);
+        reject(error);
+      });
+  });
+};
+
 export {
-  getOrders, getOrderById, deleteOrder, deleteOrderItem, createNewOrder, updateOrder, addItemToOrder, getItems,
+  getOrders, getOrderById, deleteOrder, deleteOrderItem, createNewOrder, updateOrder, addItemToOrder, getItems, closeOrder,
 };
