@@ -99,6 +99,7 @@ function OrderDetails() {
     <div id="order-detailspage"><br />
       <h1>{`${order.customerName}'s Order`}</h1><br />
       <div id="order-details">
+        {order && (
         <OrderDetailsCard
           order={order}
           onDeleteOrder={handleDeleteOrder}
@@ -111,6 +112,7 @@ function OrderDetails() {
           showModal={showModal}
           onCloseOrder={() => setShowCloseOrderModal(true)}
         />
+        )}
         {/* Modal for closing order */}
         <Modal show={showCloseOrderModal} onHide={() => setShowCloseOrderModal(false)}>
           <Modal.Header closeButton>
