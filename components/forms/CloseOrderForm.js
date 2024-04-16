@@ -17,10 +17,9 @@ function CloseOrderForm({ orderId, onCloseOrder }) {
         <select value={paymentType} onChange={(e) => setPaymentType(e.target.value)} required>
           <option value="">Select a type</option>
           <option value="cash">Cash</option>
-          <option value="check">Check</option>
           <option value="debit">Debit</option>
           <option value="credit">Credit</option>
-          <option value="mobile-payment">Mobile Payment</option>
+          <option value="mobile-payment">Mobile</option>
         </select>
       </label>
       <label>

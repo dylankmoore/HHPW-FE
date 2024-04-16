@@ -49,16 +49,16 @@ function OrderDetailsCard({
       }}
       >
         {`${order.customerName}'s Order`}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-          {order.isOpen && (
-          <Button id="edit1" onClick={() => onUpdate(order.orderId)}>
-            <img src="/edit.png" alt="Edit post" style={{ width: '20px', height: '20px' }} />
-          </Button>
-          )}
-          <Button id="delete1" onClick={() => onDeleteOrder(order.orderId)}>
-            <img src="/delete.png" alt="Delete post" style={{ width: '20px', height: '20px' }} />
-          </Button>
-        </div>
+        {order.isOpen && (
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+            <Button id="edit1" onClick={() => onUpdate(order.orderId)}>
+              <img src="/edit.png" alt="Edit post" style={{ width: '20px', height: '20px' }} />
+            </Button>
+            <Button id="delete1" onClick={() => onDeleteOrder(order.orderId)}>
+              <img src="/delete.png" alt="Delete post" style={{ width: '20px', height: '20px' }} />
+            </Button>
+          </div>
+        )}
       </Card.Header>
       <ListGroup variant="flush">
         <ListGroup.Item><strong>Email:</strong> {order.email}</ListGroup.Item>
