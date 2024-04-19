@@ -208,6 +208,7 @@ const closeOrder = (orderId, paymentDetails) => {
       .then((data) => {
         console.warn('Order closed:', data);
         resolve(data);
+        return data;
       })
       .catch((error) => {
         console.error('Failed to close order:', error);

@@ -8,6 +8,10 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+h1 {
+  font-family: monospace;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -18,11 +22,11 @@ a {
 }
 
 body {
-  background-color: #ffe6e6;
+  background-color:rgb(250, 242, 242)
 }
 
 .navi {
-  background-color: rgb(233, 171, 171);
+  background-color:rgb(250, 242, 242);
   font-size: 14px;
 }
 
@@ -51,7 +55,7 @@ body {
 
 #signin:hover,
 #signin:focus {
-  background-color: rgb(255, 107, 88);
+  background-color:rgb(216, 123, 123);
   border-color: white;
   box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
   transform: translateY(-0.25em);
@@ -60,6 +64,7 @@ body {
 #orders{
 display: flex;
 flex-wrap: wrap;
+margin-left: 40px;
 }
 
 #ordercard{
@@ -86,7 +91,7 @@ flex-wrap: wrap;
 
 #details:hover,
 #details:focus {
-  background-color: rgb(255, 107, 88);
+  background-color: rgb(216, 123, 123);
   border-color: white;
   box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
   transform: translateY(-0.25em);
@@ -129,13 +134,13 @@ flex-wrap: wrap;
 
 #additemsbtn:hover,
 #additemsbtn:focus {
-  background-color: rgb(255, 107, 88);
+  background-color: rgb(216, 123, 123);
   border-color: white;
   box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
   transform: translateY(-0.25em);
 }
 
-#delitemsbtn{
+#closebtn{
   width: 70px;
   margin-left: 90px;
   width: 150px;
@@ -148,9 +153,9 @@ flex-wrap: wrap;
   box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-#delitemsbtn:hover,
-#delitemsbtn:focus {
-  background-color: rgb(255, 107, 88);
+#closebtn:hover,
+#closebtn:focus {
+  background-color: rgb(216, 123, 123);
   border-color: white;
   box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
   transform: translateY(-0.25em);
@@ -171,7 +176,7 @@ flex-wrap: wrap;
 
 #createsubmit:hover,
 #createsubmit:focus {
-  background-color: rgb(255, 107, 88);
+  background-color: rgb(216, 123, 123);
   border-color: white;
   box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
   transform: translateY(-0.25em);
@@ -181,6 +186,7 @@ flex-wrap: wrap;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 15px;
 }
 
 #createformpage input,
@@ -216,7 +222,7 @@ flex-wrap: wrap;
 
 #update-btn:hover,
 #update-btn:focus {
-  background-color: rgb(255, 107, 88);
+  background-color: rgb(216, 123, 123);
   border-color: white;
   box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
   transform: translateY(-0.25em);
@@ -226,4 +232,31 @@ flex-wrap: wrap;
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+#header {
+  background-color: rgb(255, 255, 255);
+}
+
+#add {
+  font-family: monospace;
+  background-color:rgb(219, 223, 243);
+  border-color: rgb(160, 175, 245);
+  color: black;
+}
+
+#add:hover {
+  background-color: rgb(160, 175, 245);
+}
+
+#remove {
+  background-color: rgb(249, 243, 243);
+  border-color: rgb(223, 92, 92);
+  font-family: monospace;
+  color: black;
+  font-size: 15px;
+}
+
+#remove:hover {
+  background-color:rgb(223, 92, 92);
 }

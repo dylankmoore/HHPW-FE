@@ -7,9 +7,23 @@ function CloseOrderForm({ orderId, onCloseOrder }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onCloseOrder(orderId, { paymentType, tipAmount: parseFloat(tipAmount) });
-  };
+    const payload = {
+      paymentType,
+      tipAmount: parseFloat(tipAmount),
+    };
 
+    // Log specific fields instead of the whole payload
+    console.warn('Submitting close order with payment type:', paymentType);
+    console.warn('Submitting close order with tip amount:', parseFloat(tipAmount));
+
+    onCloseOrder(orderId, payload)
+      .then((response) => {
+        console.warn('Order closed successfully, response:', response); // Log success response
+      })
+      .catch((error) => {
+        console.error('Error closing order:', error); // Log any errors
+      });
+  };
   return (
     <form onSubmit={handleSubmit}>
       <label>
@@ -22,7 +36,7 @@ function CloseOrderForm({ orderId, onCloseOrder }) {
           <option value="mobile-payment">Mobile</option>
         </select>
       </label>
-      <label>
+      <label><br />
         Tip Amount:
         <input
           type="number"
@@ -30,7 +44,7 @@ function CloseOrderForm({ orderId, onCloseOrder }) {
           onChange={(e) => setTipAmount(e.target.value)}
           required
         />
-      </label>
+      </label><br /><br />
       <button type="submit">Close Order</button>
     </form>
   );
