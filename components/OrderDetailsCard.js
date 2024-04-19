@@ -44,21 +44,23 @@ function OrderDetailsCard({
 
   return (
     <Card id="detailcard" className="mb-3">
-      <Card.Header style={{
-        borderRadius: '15px 15px 0 0', display: 'flex', justifyContent: 'space-between', padding: '10px',
-      }}
+      <Card.Header
+        id="header"
+        style={{
+          borderRadius: '15px 15px 0 0', display: 'flex', justifyContent: 'space-between', padding: '10px', fontSize: '20px',
+        }}
       >
         {`${order.customerName}'s Order`}
-        {order.isOpen && (
-          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-            <Button id="edit1" onClick={() => onUpdate(order.orderId)}>
-              <img src="/edit.png" alt="Edit post" style={{ width: '20px', height: '20px' }} />
-            </Button>
-            <Button id="delete1" onClick={() => onDeleteOrder(order.orderId)}>
-              <img src="/delete.png" alt="Delete post" style={{ width: '20px', height: '20px' }} />
-            </Button>
-          </div>
-        )}
+        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+          {order.isOpen && (
+          <Button id="edit1" onClick={() => onUpdate(order.orderId)}>
+            <img src="/edit.png" alt="Edit post" style={{ width: '20px', height: '20px' }} />
+          </Button>
+          )}
+          <Button id="delete1" onClick={() => onDeleteOrder(order.orderId)}>
+            <img src="/delete.png" alt="Delete post" style={{ width: '20px', height: '20px' }} />
+          </Button>
+        </div>
       </Card.Header>
       <ListGroup variant="flush">
         <ListGroup.Item><strong>Email:</strong> {order.email}</ListGroup.Item>
@@ -78,16 +80,16 @@ function OrderDetailsCard({
               </div>
 
               {order.isOpen && (
-                <Button variant="outline-dark" size="sm" onClick={() => onDeleteItem(item.orderItemId)}>Delete</Button>
+                <Button id="remove" size="sm" onClick={() => onDeleteItem(item.orderItemId)}>REMOVE</Button>
               )}
             </div>
           </ListGroup.Item>
         ))}
         <ListGroup.Item className="d-flex justify-content-between">
           {order.isOpen && (
-          <Button id="additemsbtn" onClick={() => setShowModal(true)}>Add Items</Button>)}
+            <Button id="additemsbtn" onClick={() => setShowModal(true)}>Add Items</Button>)}
           {order.isOpen && (
-            <Button id="delitemsbtn" onClick={onCloseOrder}>Close Order</Button>
+            <Button id="closebtn" onClick={onCloseOrder}>Close Order</Button>
           )}
         </ListGroup.Item>
       </ListGroup>
@@ -100,9 +102,9 @@ function OrderDetailsCard({
           <ListGroup>
             {items.map((item) => (
               <ListGroup.Item key={item.itemId}>
-                {item.name} - ${item.price.toFixed(2)}
+                {item.name} - ${item.price.toFixed(2)}&nbsp;
                 <Button
-                  variant="primary"
+                  id="add"
                   size="sm"
                   onClick={() => handleAddItem(item.itemId)}
                 >

@@ -82,6 +82,8 @@ function OrderDetails() {
   console.warn('showModal value:', showModal);
 
   const onCloseOrder = async (orderId, closureDetails) => {
+    console.warn('Closing order with ID:', orderId, 'and details:', closureDetails);
+
     try {
       const data = await closeOrder(orderId, closureDetails);
       console.warn('Order closed:', data);
@@ -97,7 +99,7 @@ function OrderDetails() {
   return (
 
     <div id="order-detailspage"><br />
-      <h1>{`${order.customerName}'s Order`}</h1><br />
+      <h1>{`${order.customerName}'s Order`}</h1><hr /><br />
       <div id="order-details">
         {order && (
         <OrderDetailsCard
@@ -122,7 +124,18 @@ function OrderDetails() {
             <CloseOrderForm orderId={order.orderId} onCloseOrder={onCloseOrder} />
           </Modal.Body>
         </Modal>
-      </div>
+      </div><br />
+      <footer style={{
+        padding: '20px 10px',
+        textAlign: 'center',
+        borderTop: '1px solid black',
+        width: '100%',
+        fontFamily: 'monospace',
+        fontSize: '14px',
+      }}
+      >
+        HIP HOP, PIZZA, & WANGS, 237 MUSIC ROW, NASHVILLE, TN, 37203 - HHPWFOREVER@GMAIL.COM
+      </footer>
     </div>
   );
 }

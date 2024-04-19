@@ -14,7 +14,7 @@ const RevenuePage = () => {
     creditPayments: 0,
   });
 
-  useEffect(() => {
+  const fetchRevenueDetails = () => {
     getTotalRevenueDetails()
       .then((data) => {
         setRevenueDetails({
@@ -31,13 +31,17 @@ const RevenuePage = () => {
       .catch((error) => {
         console.error('There was an error fetching the revenue details:', error);
       });
+  };
+
+  useEffect(() => {
+    fetchRevenueDetails();
   }, []);
 
   const formatCurrency = (value) => `$${value.toFixed(2)}`;
 
   return (
     <div><br />
-      <h1>Revenue:</h1><br />
+      <h1>Revenue Totals</h1><hr /><br />
       <div id="revenuecard">
         <Card className="mb-3" style={{ width: '30%' }}>
           <Card.Header>Revenue Summary</Card.Header>
@@ -52,7 +56,18 @@ const RevenuePage = () => {
             <Card.Text><strong>Payments made with credit:</strong> {revenueDetails.creditPayments}</Card.Text>
           </Card.Body>
         </Card>
-      </div>
+      </div><br /><br />
+      <footer style={{
+        padding: '20px 10px',
+        textAlign: 'center',
+        borderTop: '1px solid black',
+        width: '100%',
+        fontFamily: 'monospace',
+        fontSize: '14px',
+      }}
+      >
+        HIP HOP, PIZZA, & WANGS, 237 MUSIC ROW, NASHVILLE, TN, 37203 - HHPWFOREVER@GMAIL.COM
+      </footer>
     </div>
   );
 };

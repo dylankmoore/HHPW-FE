@@ -15,9 +15,15 @@ const ItemAddModal = ({ orderId }) => {
     addItemToOrder(orderId, itemId)
       .then((response) => {
         console.warn('Item added:', response);
+        console.warn('Closing modal now');
+        setShow(false);
       })
       .catch(console.error);
   };
+
+  useEffect(() => {
+    console.warn('Modal show state changed:', show);
+  }, [show]);
 
   return (
     <>
@@ -31,7 +37,7 @@ const ItemAddModal = ({ orderId }) => {
             {items.map((item) => (
               <ListGroup.Item key={item.itemId}>
                 {item.name} - ${item.price.toFixed(2)}
-                <Button variant="primary" size="sm" onClick={() => handleAddItem(item.itemId)}>Add</Button>
+                <Button id="add" size="sm" onClick={() => handleAddItem(item.itemId)}>Add</Button>
               </ListGroup.Item>
             ))}
           </ListGroup>

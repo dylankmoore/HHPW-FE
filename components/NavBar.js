@@ -18,22 +18,22 @@ export default function NavBar() {
             <img src="/hhpw.png" alt="logo" className="nav-logo me-3" width="100" height="90" />
           </Navbar.Brand>
         </Link>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             {/* CLOSE NAVBAR ON LINK SELECTION: https://stackoverflow.com/questions/72813635/collapse-on-select-react-bootstrap-navbar-with-nextjs-not-working */}
             <Link passHref href="/">
-              <Nav.Link>Home</Nav.Link>
+              <Nav.Link>HOME</Nav.Link>
             </Link>&nbsp;
             <Link passHref href="/orders">
-              <Nav.Link>View Orders</Nav.Link>
+              <Nav.Link>VIEW ORDERS</Nav.Link>
             </Link>&nbsp;
             <Link passHref href="/orders/new">
-              <Nav.Link>Create An Order</Nav.Link>
+              <Nav.Link>CREATE ORDER</Nav.Link>
             </Link>&nbsp;
             <Link passHref href="/revenue">
-              <Nav.Link>View Revenue</Nav.Link>
+              <Nav.Link>REVENUE</Nav.Link>
             </Link>
             <button
               type="button"

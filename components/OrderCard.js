@@ -12,8 +12,8 @@ function OrderCard({
   return (
     <div id="ordercard">
       <Card className="mb-3">
-        <Card.Header>Order {orderObj.orderId}</Card.Header>
-        <Card.Body>
+        <Card.Header id="header">Order {orderObj.orderId}</Card.Header>
+        <Card.Body id="orderbody">
           <Card.Text><strong>Name:</strong> {orderObj.customerName}</Card.Text>
           <Card.Text><strong>Email:</strong> {orderObj.email}</Card.Text>
           <Card.Text><strong>Phone:</strong> {orderObj.customerPhone}</Card.Text>

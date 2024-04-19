@@ -11,7 +11,7 @@ function Orders() {
 
   return (
     <div><br />
-      <h1>All Orders</h1><br />
+      <h1>All Orders</h1><hr /><br />
       <div id="orders">
         {orders.length > 0 ? (
           orders.map((order) => (
@@ -20,6 +20,17 @@ function Orders() {
         ) : (
           <p>No orders to show currently.</p>
         )}
+        <footer style={{
+          padding: '20px 10px',
+          textAlign: 'center',
+          borderTop: '1px solid black',
+          width: '100%',
+          fontFamily: 'monospace',
+          fontSize: '14px',
+        }}
+        >
+          HIP HOP, PIZZA, & WANGS, 237 MUSIC ROW, NASHVILLE, TN, 37203 - HHPWFOREVER@GMAIL.COM
+        </footer>
       </div>
     </div>
   );
